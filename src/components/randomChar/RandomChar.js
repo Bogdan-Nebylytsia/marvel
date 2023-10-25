@@ -1,5 +1,5 @@
-import thor from '../../resources/thor.jpg';
-import mjolnir from '../../resources/mjolnir.png';
+import thor from '../../resources/img/thor.jpg';
+import mjolnir from '../../resources/img/mjolnir.png';
 import './randomChar.scss';
 
 const RandomChar = () => {
