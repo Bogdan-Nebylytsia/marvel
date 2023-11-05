@@ -13,6 +13,11 @@
    &__img {
       width: 180px;
       height: 180px;
+      object-fit: cover;
+   }
+   &__img-not-available {
+      width: 180px;
+      height: 180px;
       object-fit: contain;
    }
    &__info {
