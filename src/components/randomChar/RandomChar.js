@@ -17,6 +17,7 @@ class RandomChar extends Component {
 
    componentDidMount() {
       this.updateChar();
+
    }
 
    onCharLoaded = (char) => {
@@ -94,8 +95,9 @@ class RandomChar extends Component {
 
 const RandomCharBlock = ({ char }) => {
    const { name, description, thumbnail, homepage, wiki } = char;
-   const imgNoAvailable = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
-   const imgClass = imgNoAvailable ? "randomchar__img-not-available" : "randomchar__img-not-available";
+  
+   const imgNotAvailable = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
+   const imgClass = imgNotAvailable ? "randomchar__img-not-available" : "randomchar__img-not-available";
    return (
       <div className="randomchar__block">
          <img src={thumbnail} alt="Random character" className={imgClass} />

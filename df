@@ -1,0 +1,35 @@
+[33mcommit d358fc1fff3dd2f82979a629e487e0644dccae95[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Sun Nov 5 21:10:22 2023 +0200
+
+    functionality for CharList and CharInfo
+
+[33mcommit 1e8ee3ec759268a1c47bec05c2a24e6166f2e789[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Tue Oct 31 20:39:41 2023 +0200
+
+    functionality for Randomhar
+
+[33mcommit 7944100e4f01c837b85e61693776a6350a775927[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Tue Oct 31 20:38:16 2023 +0200
+
+    functionality for Randomhar
+
+[33mcommit 28bdfcb44036d2f6df165f7edb44e58687bf4804[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Wed Oct 25 18:53:54 2023 +0300
+
+    adding remaining components and styles
+
+[33mcommit b9360c9138fa1017ead4831d12a044a0d93726b4[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Sun Oct 22 21:39:33 2023 +0300
+
+    first commit
+
+[33mcommit 3de0abbb3c7928bf7fbbb696d14f5c4f61cd870d[m
+Author: Bogdan Nebylytsia <bohdan.deal.ua@gmail.com>
+Date:   Sun Oct 22 17:55:55 2023 +0300
+
+    Initialize project using Create React App
