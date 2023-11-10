@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Skeleton from '../skeleton/Skeleton';
 import ErrorMassage from '../errorMassage/ErrorMassage';
@@ -141,6 +142,10 @@ const View = ({ char }) => {
          </ul>
       </>
    )
+}
+
+CharInfo.propTypes = {
+   charId: PropTypes.number
 }
 
 export default CharInfo;
