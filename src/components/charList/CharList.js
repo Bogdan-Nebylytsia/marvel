@@ -89,6 +89,7 @@ class CharList extends Component {
                }}
                onKeyDown={e => {
                   if (e.key === " " || e.key === "Enter") {
+                     e.preventDefault();
                      this.props.onCharSelected(id);
                      this.focusOnItem(i);
                   }
