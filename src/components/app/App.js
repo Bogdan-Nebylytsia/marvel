@@ -3,7 +3,8 @@ import AppHeader from "../appHeader/AppHeader";
 import CharList from "../charList/CharList";
 import RandomChar from "../randomChar/RandomChar";
 import CharInfo from "../charInfo/CharInfo";
-import ErrorBoundary from "../errorBoundary/ErrorBoundary"
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import ComicsList from '../comicsList/ComicsList';
 
 import decoration from '../../resources/img/vision.png';
 

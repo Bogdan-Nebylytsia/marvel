@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MarvelService from '../../services/MarvelSevice';
+import useMarvelService from '../../services/MarvelSevice';
 import ErrorMassage from '../errorMassage/ErrorMassage';
 import Spinner from '../spinner/Spinner';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -7,11 +7,9 @@ import './randomChar.scss';
 
 const RandomChar = () => {
 
-   const [char, setChar] = useState(null);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(false);
+   const [char, setChar] = useState({});
 
-   const marvelService = new MarvelService();
+   const {loading, error, clearError, getCharacter} = useMarvelService();
 
    useEffect(() => {
       updateChar();
@@ -19,44 +17,26 @@ const RandomChar = () => {
 
    const onCharLoaded = (char) => {
       setChar(char);
-      setLoading(false);
-   }
-
-   const onCharLoading = () => {
-      setLoading(true);
-   }
-
-   const offError = () => {
-      setError(false);
-   }
-
-   const onError = () => {
-      setLoading(false);
-      setError(true);
    }
 
    const updateChar = () => {
+      clearError();
       const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
 
-      offError();
-      onCharLoading();
-
-      marvelService
-         .getCharacter(id)
-         .then(onCharLoaded)
-         .catch(onError);
+      getCharacter(id)
+      .then(onCharLoaded)
    }
 
       const errorMassage = error ? <ErrorMassage /> : null; 
       const spinner = loading ? <Spinner /> : null;
-      const randomCharBlock = !(error || loading) ? <RandomCharBlock char={char} /> : null;
+      const content = !(error || loading || !char) ? <RandomCharBlock char={char} /> : null;
 
       return (
          <div className="randomchar">
             
             {errorMassage}
             {spinner}
-            {randomCharBlock}
+            {content}
 
             <div className="randomchar__static">
                <p className="randomchar__title">
@@ -77,15 +57,18 @@ const RandomChar = () => {
 }
 
 const RandomCharBlock = ({ char }) => {
+
    const { name, description, thumbnail, homepage, wiki } = char;
   
-   const imgNotAvailable = thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
-   const imgClass = imgNotAvailable ? "randomchar__img-not-available" : "randomchar__img-not-available";
+   let imgClass = "randomchar__img";
+   if (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
+      imgClass = "randomchar__img-not-available";
+   }
    return (
       <div className="randomchar__block">
          <img src={thumbnail} alt="Random character" className={imgClass} />
          <div className="randomchar__info">
-            <p className="randomchar__name">{name.length > 20 ? `${char.name.substring(0,20)}...` : name}</p>
+            <p className="randomchar__name">{name && name.length > 20 ? `${char.name.substring(0,20)}...` : name}</p>
             <p className="randomchar__descr">
                {description}
             </p>

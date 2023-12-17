@@ -1,54 +1,38 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
 import './charList.scss';
-import MarvelService from '../../services/MarvelSevice';
+import useMarvelService from '../../services/MarvelSevice';
 import Spinner from '../spinner/Spinner';
 import ErrorMassage from '../errorMassage/ErrorMassage';
 
 const CharList = (props) => {
 
    const [charList, setCharList] = useState([]);
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(false);
    const [moreCharLoading, setMoreCharLoading] = useState(false);
    const [offset, setOffset] = useState(210);
    const [charEnded, setCharEnded] = useState(false);
 
-   const marvelService = new MarvelService();
+   const {loading, error, getAllCharacters} = useMarvelService();
 
    useEffect(() => {
-      onRequest();
+      onRequest(offset, true);
    }, [])
 
-   const onRequest = (offset) => {
-      onCharListLoading();
+   const onRequest = (offset, initial ) => {
 
-      marvelService.getAllCharacters(offset)
+      initial ? setMoreCharLoading(false) : setMoreCharLoading(true);
+
+      getAllCharacters(offset)
          .then(onCharListLoaded)
-         .catch(onError);
-   }
-
-   const onCharListLoading = () => {
-
-      setMoreCharLoading(true);
-   
    }
 
    const onCharListLoaded = (newCharList) => {
       const ended = newCharList.length < 9 ? true : false;
 
       setCharList(charList => [...charList, ...newCharList]);
-      setLoading(loading => false);
       setMoreCharLoading(moreCharLoading => false);
       setOffset(offset => offset + 9);
       setCharEnded(charEnded => ended);
-   }
-
-   const onError = () => {
-   
-      setError(true);
-      setLoading(false);
-
    }
 
    const itemRefs = useRef([]);
@@ -104,15 +88,14 @@ const CharList = (props) => {
 
       const items = renderItems(charList);
 
-      const spinner = loading ? <Spinner /> : null;
+      const spinner = loading && !moreCharLoading ? <Spinner /> : null;
       const errorMassage = error ? <ErrorMassage /> : null;
-      const content = !(loading || error) ? items : null;
 
       return (
          <div className="char__list">
             {spinner}
             {errorMassage}
-            {content}
+            {items}
             <button
                className="button button__main button__long"
                disabled={moreCharLoading}
