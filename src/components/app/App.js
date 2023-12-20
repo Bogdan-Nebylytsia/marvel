@@ -7,6 +7,7 @@ import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import ComicsList from '../comicsList/ComicsList';
 
 import decoration from '../../resources/img/vision.png';
+import AppBunner from '../appBunner/AppBunner';
 
 const App = () => {
 
@@ -20,18 +21,24 @@ const App = () => {
       <div className="app">
         <AppHeader />
         <main>
-        <ErrorBoundary>
+          <ErrorBoundary>
+            <AppBunner />
+            <ComicsList/>
+          </ErrorBoundary>
+          
+          
+        {/* <ErrorBoundary>
             <RandomChar />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
           <div className="char__content">
-            <ErrorBoundary>
+            {/* <ErrorBoundary>
               <CharList onCharSelected={onCharSelected} />
             </ErrorBoundary>
             <ErrorBoundary>
               <CharInfo charId={selectedChar} />
-            </ErrorBoundary>
+            </ErrorBoundary> */}
           </div>
-          <img className="bg-decoration" src={decoration} alt="vision" />
+          {/* <img className="bg-decoration" src={decoration} alt="vision" /> */}
         </main>
       </div>
     )
