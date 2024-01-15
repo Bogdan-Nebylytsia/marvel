@@ -2,6 +2,7 @@ import useMarvelService from '../../services/MarvelSevice';
 import ErrorMassage from '../errorMassage/ErrorMassage';
 import Spinner from '../spinner/Spinner';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './comicsList.scss';
 
@@ -37,7 +38,7 @@ const ComicsList = () => {
 
    const renderItems = (arr) => {
       const items = arr.map((item, i) => {
-         const { thumbnail, title, price } = item;
+         const { thumbnail, title, price, id } = item;
 
          let imgStyle = { "objectFit": "cover" };
 
@@ -47,7 +48,7 @@ const ComicsList = () => {
 
          return (
             <li key={i} className="comics__item">
-               <a href="#">
+               <Link to={`/comics/${id}`}>
                   <img
                      src={thumbnail}
                      alt={title}
@@ -56,7 +57,7 @@ const ComicsList = () => {
                   />
                   <div className="comics__item-name">{title}</div>
                   <div className="comics__item-price">{price}</div>
-               </a>
+               </Link>
             </li>
          )
       });
