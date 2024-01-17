@@ -6,6 +6,7 @@ import ErrorMassage from '../errorMassage/ErrorMassage';
 import Spinner from '../spinner/Spinner';
 import useMarvelService from '../../services/MarvelSevice';
 import './charInfo.scss';
+import { Link } from 'react-router-dom';
 
 const CharInfo = (props) => {
    const [char, setChar] = useState(null);
@@ -55,20 +56,22 @@ const View = ({ char }) => {
       if (length === 'all') {
          return (
             arr.map((item, i) => {
+               const comicId = item.resourceURI.slice(43);
                return (
-                  <li key={i} className="char__comics-item">
+                  <Link to={`/comic/${comicId}`} key={i} className="char__comics-item">
                      {item.name}
-                  </li>
+                  </Link>
                )
             })
          )
       } else {
          return (
-            arr.slice( 0, length ).map((item, i) => {
+            arr.slice(0, length).map((item, i) => {
+               const comicId = item.resourceURI.slice(43);
                return (
-                  <li key={i} className="char__comics-item">
+                  <Link to={`/comics/${comicId}`} key={i} className="char__comics-item">
                      {item.name}
-                  </li>
+                  </Link>
                )
             })
          )
