@@ -1,18 +1,32 @@
 {
   "files": {
-    "main.css": "/static/css/main.b92449a7.css",
-    "main.js": "/static/js/main.65e685d1.js",
+    "main.css": "/static/css/main.eea96f34.css",
+    "main.js": "/static/js/main.a8407240.js",
+    "static/js/807.8891d859.chunk.js": "/static/js/807.8891d859.chunk.js",
+    "static/css/549.3a197aa3.chunk.css": "/static/css/549.3a197aa3.chunk.css",
+    "static/js/549.7afaa237.chunk.js": "/static/js/549.7afaa237.chunk.js",
+    "static/css/67.76b2ef94.chunk.css": "/static/css/67.76b2ef94.chunk.css",
+    "static/js/67.7d2b9ffd.chunk.js": "/static/js/67.7d2b9ffd.chunk.js",
+    "static/css/642.7aa6b34b.chunk.css": "/static/css/642.7aa6b34b.chunk.css",
+    "static/js/642.1c4a3a39.chunk.js": "/static/js/642.1c4a3a39.chunk.js",
     "static/media/vision.png": "/static/media/vision.4d6f967110994e4613c0.png",
     "static/media/mjolnir.png": "/static/media/mjolnir.b10f8e634d5efd274514.png",
     "static/media/Avengers.png": "/static/media/Avengers.c29e0ef078dddc7551e8.png",
     "static/media/error.gif": "/static/media/error.42292aa12b6bc303ce99.gif",
     "static/media/Avengers_logo.png": "/static/media/Avengers_logo.9b944f717f2c146c4762.png",
     "index.html": "/index.html",
-    "main.b92449a7.css.map": "/static/css/main.b92449a7.css.map",
-    "main.65e685d1.js.map": "/static/js/main.65e685d1.js.map"
+    "main.eea96f34.css.map": "/static/css/main.eea96f34.css.map",
+    "main.a8407240.js.map": "/static/js/main.a8407240.js.map",
+    "807.8891d859.chunk.js.map": "/static/js/807.8891d859.chunk.js.map",
+    "549.3a197aa3.chunk.css.map": "/static/css/549.3a197aa3.chunk.css.map",
+    "549.7afaa237.chunk.js.map": "/static/js/549.7afaa237.chunk.js.map",
+    "67.76b2ef94.chunk.css.map": "/static/css/67.76b2ef94.chunk.css.map",
+    "67.7d2b9ffd.chunk.js.map": "/static/js/67.7d2b9ffd.chunk.js.map",
+    "642.7aa6b34b.chunk.css.map": "/static/css/642.7aa6b34b.chunk.css.map",
+    "642.1c4a3a39.chunk.js.map": "/static/js/642.1c4a3a39.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b92449a7.css",
-    "static/js/main.65e685d1.js"
+    "static/css/main.eea96f34.css",
+    "static/js/main.a8407240.js"
   ]
 }

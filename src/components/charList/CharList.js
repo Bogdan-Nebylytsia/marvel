@@ -26,7 +26,7 @@ const CharList = (props) => {
          .then(onCharListLoaded)
    }
 
-   const onCharListLoaded = (newCharList) => {
+   const onCharListLoaded = async (newCharList) => {
       const ended = newCharList.length < 9 ? true : false;
 
       setCharList(charList => [...charList, ...newCharList]);
