@@ -31,10 +31,19 @@ const CharList = (props) => {
    const onCharListLoaded = async (newCharList) => {
       const ended = newCharList.length < 9 ? true : false;
 
-      setCharList(charList => [...charList, ...newCharList]);
-      setMoreCharLoading(moreCharLoading => false);
-      setOffset(offset => offset + 9);
-      setCharEnded(charEnded => ended);
+      const addChar = (index) => {
+         if (index < newCharList.length) {
+            setCharList(charList => [...charList, newCharList[index]]);
+            setTimeout(() => addChar(index + 1), 300)
+         } else {
+            setMoreCharLoading(moreCharLoading => false);
+            setOffset(offset => offset + 9);
+            setCharEnded(charEnded => ended);
+         }
+      }
+
+      addChar(0);
+      
    }
 
    const itemRefs = useRef([]);
@@ -57,7 +66,7 @@ const CharList = (props) => {
          }
 
          return (
-            <CSSTransition key={id} timeout={5000} classNames='char__item'>
+            <CSSTransition key={id} timeout={300} classNames='char__item'>
                <li
                   ref={el => itemRefs.current[i] = el}
                   tabIndex={0}

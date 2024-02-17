@@ -38,9 +38,11 @@
       }
       &-enter {
          opacity: 0;
+         transform: translateY(20%);
          &-active {
             opacity: 1;
-            transition: opacity 5000ms ease-in-out;
+            transform: translateY(0%);
+            transition: all 300ms ease-in-out;
          }
       }
    }
