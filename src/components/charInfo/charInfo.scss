@@ -65,3 +65,26 @@
       }
    }
 }
+
+.fade-randomChar-enter {
+   opacity: 0;
+   transform: translateX(100%);
+ }
+ 
+ .fade-randomChar-enter-active {
+   opacity: 1;
+   transform: translateX(0%);
+ }
+ 
+ .fade-randomChar-exit {
+   opacity: 1;
+ }
+ 
+ .fade-randomChar-exit-active {
+   opacity: 0;
+ }
+ 
+ .fade-randomChar-enter-active,
+ .fade-randomChar-exit-active {
+   transition: all 450ms ease-in-out;
+ }

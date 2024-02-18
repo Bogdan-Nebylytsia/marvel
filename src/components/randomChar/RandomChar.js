@@ -36,12 +36,10 @@ const RandomChar = () => {
             <CSSTransition
                key={!(error || loading || !char) ? "content" : loading ? "spinner" : "error"}
                timeout={450}
-               classNames={"fade"}>
+               classNames={"fade-randomChar"}>
                {!(error || loading || !char) ? <RandomCharBlock char={char} /> : loading ? <Spinner /> : <ErrorMassage />}
             </CSSTransition>
          </SwitchTransition>
-
-
 
          <div className="randomchar__static">
             <p className="randomchar__title">

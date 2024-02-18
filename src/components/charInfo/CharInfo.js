@@ -7,14 +7,16 @@ import Spinner from '../spinner/Spinner';
 import useMarvelService from '../../services/MarvelSevice';
 import './charInfo.scss';
 import { Link } from 'react-router-dom';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 const CharInfo = (props) => {
    const [char, setChar] = useState(null);
 
-   const {loading, error, clearError, getCharacter} = useMarvelService();
+   const { loading, error, clearError, getCharacter } = useMarvelService();
 
    useEffect(() => {
       updateChar();
+      // eslint-disable-next-line
    }, [props.charId])
 
    const updateChar = () => {
@@ -28,20 +30,23 @@ const CharInfo = (props) => {
          .then(setChar)
    }
 
+   return (
+      <div className="char__info">
+         <SwitchTransition>
+            <CSSTransition
+               key={!char && !loading && !error ? "skeleton" : !(loading || error || !char) ? "char" :
+                  loading ? "loading" : "errorMassage"}
+               timeout={300}
+               classNames={"fade-selectedСhar"}
+            >
+               <div className='fade'>
+                  {!char && !loading && !error ? <Skeleton /> : !(loading || error || !char) ? <View char={char} /> : loading ? <Spinner /> : <ErrorMassage />}
+               </div>
 
-      const skeleton = char || loading || error ? null : <Skeleton />;
-      const spinner = loading ? <Spinner /> : null;
-      const errorMassage = error ? <ErrorMassage /> : null;
-      const content = !(loading || error || !char) ? <View char={char} /> : null;
-
-      return (
-         <div className="char__info">
-            {skeleton}
-            {spinner}
-            {errorMassage}
-            {content}
-         </div>
-      )
+            </CSSTransition>
+         </SwitchTransition>
+      </div>
+   )
 
 }
 
