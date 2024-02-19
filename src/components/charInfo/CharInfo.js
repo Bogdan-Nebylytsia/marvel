@@ -39,7 +39,7 @@ const CharInfo = (props) => {
                timeout={300}
                classNames={"fade-selectedСhar"}
             >
-               <div className='fade'>
+               <div className='fade-selectedСhar'>
                   {!char && !loading && !error ? <Skeleton /> : !(loading || error || !char) ? <View char={char} /> : loading ? <Spinner /> : <ErrorMassage />}
                </div>
 

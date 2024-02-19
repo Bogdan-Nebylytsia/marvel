@@ -15,7 +15,7 @@ const MainPage = () => {
    }
 
    return (
-      <>
+      <div className='fade-page'>
          <ErrorBoundary>
             <RandomChar />
          </ErrorBoundary>
@@ -28,7 +28,7 @@ const MainPage = () => {
             </ErrorBoundary>
          </div>
          <img className="bg-decoration" src={decoration} alt="vision" />
-      </>
+      </div>
    )
 }
 

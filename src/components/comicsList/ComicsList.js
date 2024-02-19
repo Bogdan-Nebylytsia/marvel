@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './comicsList.scss';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 const ComicsList = () => {
@@ -31,11 +32,21 @@ const ComicsList = () => {
 
       const ended = newComicsList.length < 8 ? true : false;
 
-      setOffset(offset => offset + 8);
-      setComicsList(comicsList => [...comicsList, ...newComicsList]);
-      setMoreComicsLoading(false);
-      setComicsEnded(comicsEnded => ended);
-  }
+      const addComic = (index) => {
+         if (index < newComicsList.length) {
+            setComicsList(comicsList => [...comicsList, newComicsList[index]]);
+            setTimeout(() => addComic(index + 1), 300)
+         } else {
+            setOffset(offset => offset + 8);
+            setMoreComicsLoading(false);
+            setComicsEnded(comicsEnded => ended);
+         }
+      }
+
+      addComic(0);
+
+
+   }
 
    const renderItems = (arr) => {
       const items = arr.map((item, i) => {
@@ -48,24 +59,30 @@ const ComicsList = () => {
          }
 
          return (
-            <li key={i} className="comics__item">
-               <Link to={`/comics/${id}`}>
-                  <img
-                     src={thumbnail}
-                     alt={title}
-                     style={imgStyle}
-                     className="comics__item-img"
-                  />
-                  <div className="comics__item-name">{title}</div>
-                  <div className="comics__item-price">{price}</div>
-               </Link>
-            </li>
+            <CSSTransition key={i} timeout={300} classNames="comics__item">
+               <li className="comics__item">
+                  <Link to={`/comics/${id}`}>
+                     <img
+                        src={thumbnail}
+                        alt={title}
+                        style={imgStyle}
+                        className="comics__item-img"
+                     />
+                     <div className="comics__item-name">{title}</div>
+                     <div className="comics__item-price">{price}</div>
+                  </Link>
+               </li>
+            </CSSTransition>
+
          )
       });
 
       return (
          <ul className="comics__grid">
-            {items}
+            <TransitionGroup component={null}>
+               {items}
+            </TransitionGroup>
+
          </ul>
       )
    }
@@ -77,12 +94,12 @@ const ComicsList = () => {
 
    return (
       <div className="comics__list">
-         {errorMassage}
          {spinner}
+         {errorMassage}
          {items}
          <button className="button button__main button__long"
-            style={{'display' : comicsEnded ? 'none' : 'block'}}
-            disabled = {moreComicsLoading}
+            style={{ 'display': comicsEnded ? 'none' : 'block' }}
+            disabled={moreComicsLoading}
             onClick={() => onRequest(offset)}
          >
             <div className="inner">LOAD MORE</div>

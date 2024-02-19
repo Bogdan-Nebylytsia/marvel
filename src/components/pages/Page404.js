@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Page404 = () => {
    return (
-      <div>
+      <div className='fade-page'>
          <ErrorMassage/>
          <p style={{ "textAlign": "center", "fontWeight": "bold", "fontSize": "24px" }}>Ooops page not found...</p>
          <Link style={{

@@ -6,10 +6,10 @@ const ComicsPage = () => {
    const outlet = useOutlet();
 
    return (
-      <>
+      <div className='fade-page'>
          <AppBunner />
          {outlet ? <Outlet/> : <ComicsList />}
-      </>
+      </div>
    )
 }
 

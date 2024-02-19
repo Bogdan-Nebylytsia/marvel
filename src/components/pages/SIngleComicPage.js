@@ -36,11 +36,11 @@ const SingleComicPage = () => {
    const content = !(error || loading || !comic) ? <View comic={comic} /> : null;
 
    return (
-      <>
+      <div className='fade-page'>
          {errorMassage}
          {spinner}
          {content}
-      </>
+      </div>
    )
 }
 
@@ -48,7 +48,7 @@ const View = ({ comic }) => {
    const { title, thumbnail, price, description, pageCount, language } = comic;
 
    return (
-      <div className="single-comic">
+      <div className="single-comic fade-page">
          <img src={thumbnail} alt={title} className="single-comic__img" />
          <div className="single-comic__info">
             <h2 className="single-comic__name">{title}</h2>
