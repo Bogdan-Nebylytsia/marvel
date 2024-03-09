@@ -77,6 +77,12 @@ main {
    }
 }
 
+.sticky__info {
+   position: sticky;
+   top: 5px;
+   z-index: 5;
+}
+
 .fade-page-enter {
    opacity: 0;
  }

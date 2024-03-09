@@ -1,0 +1,44 @@
+@import '../../style/variables';
+
+.char__search {
+   &-form {
+      margin-top: 30px;
+      padding: 25px;
+      background-color: #FFFFFF;
+      box-shadow: 5px 5px 20px 0px #00000040;
+   }
+   &-label {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      color: #000;
+   }
+   &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      align-items: center;
+   }
+   &-input {
+      padding: 0 10px;
+      width: 250px;
+      height: 38px;
+      border: none;
+      box-shadow: 0px 4px 4px 0px #00000040;
+      font-size: 14px;
+   }
+   &-critical-error{ 
+      margin-top: 30px;
+      padding: 10px;
+   }
+   &-error {
+      color: $main-color;
+      margin-top: 15px;
+      font-weight: 700;
+   }
+   &-success {
+      color:#03710E;
+      font-weight: 700;
+   }
+}
