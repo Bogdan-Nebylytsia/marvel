@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Helmet } from 'react-helmet';
+
 import CharList from "../charList/CharList";
 import RandomChar from "../randomChar/RandomChar";
 import CharInfo from "../charInfo/CharInfo";
@@ -17,6 +19,12 @@ const MainPage = () => {
 
    return (
       <div className='fade-page'>
+         <Helmet>
+            <meta
+               name="description"
+               content="Marvel information portal main page" />
+            <title>Marvel information portal</title>
+         </Helmet>
          <ErrorBoundary>
             <RandomChar />
          </ErrorBoundary>

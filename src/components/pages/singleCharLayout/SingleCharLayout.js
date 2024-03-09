@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import './singleCharLayout.scss';
 import AppBunner from "../../appBunner/AppBunner";
 
@@ -7,6 +8,12 @@ const SingleCharLayout = ({ data }) => {
 
    return (
       <>
+         <Helmet>
+            <meta
+               name="description"
+               content={ `${name} marvel character information` } />
+            <title>{name}</title>
+         </Helmet>
          <AppBunner />
          <div className="single-char fade-page">
             <img src={thumbnail} alt={name} className="single-char__img" />
