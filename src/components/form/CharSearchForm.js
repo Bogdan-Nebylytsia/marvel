@@ -9,7 +9,7 @@ import ErrorMassage from '../errorMassage/ErrorMassage';
 
 const CharSearchForm = () => {
    const [char, setChar] = useState(null);
-   const { loading, error, clearError, getCharacterByName } = useMarvelService();
+   const { process, setProcess, clearError, getCharacterByName } = useMarvelService();
 
    const onCharNameLoaded = (char) => {
       setChar(char);
@@ -19,11 +19,12 @@ const CharSearchForm = () => {
       clearError();
 
       getCharacterByName(name)
-         .then(onCharNameLoaded);
+         .then(onCharNameLoaded)
+         .then(() => setProcess('confirmed'));
 
    }
 
-   const criticalError = error ? <div className="char__search-critical-error"><ErrorMassage /></div> : null;
+   const criticalError = process === 'error' ? <div className="char__search-critical-error"><ErrorMassage /></div> : null;
    const result = !char ? null : char.length > 0 ?
       <div className="char__search-wrapper">
          <div className='char__search-success'>There is! Visit {char[0].name} page?</div>
@@ -58,7 +59,7 @@ const CharSearchForm = () => {
                <label className="char__search-label" htmlFor="charName">Or find a character by name:</label>
                <div className="char__search-wrapper">
                   <Field className="char__search-input" type="text" name="charName" placeholder="Enter name" />
-                  <button disabled={loading} type='submit' className="button button__main">
+                  <button disabled={process === 'loading'} type='submit' className="button button__main">
                      <div className="inner">find</div>
                   </button>
                </div>

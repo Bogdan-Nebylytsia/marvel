@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import useMarvelService from '../../services/MarvelSevice';
-import ErrorMassage from '../errorMassage/ErrorMassage';
-import Spinner from '../spinner/Spinner';
+import setContent from '../../utils/setContent';
 import mjolnir from '../../resources/img/mjolnir.png';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import './randomChar.scss';
@@ -10,7 +9,7 @@ const RandomChar = () => {
 
    const [char, setChar] = useState({});
 
-   const { loading, error, clearError, getCharacter } = useMarvelService();
+   const { process, setProcess, clearError, getCharacter } = useMarvelService();
 
    useEffect(() => {
       updateChar();
@@ -27,6 +26,7 @@ const RandomChar = () => {
 
       getCharacter(id)
          .then(onCharLoaded)
+         .then(() => setProcess('confirmed'));
    }
 
    return (
@@ -34,10 +34,10 @@ const RandomChar = () => {
 
          <SwitchTransition>
             <CSSTransition
-               key={!(error || loading || !char) ? "content" : loading ? "spinner" : "error"}
+               key={process}
                timeout={450}
                classNames={"fade-randomChar"}>
-               {!(error || loading || !char) ? <RandomCharBlock char={char} /> : loading ? <Spinner /> : <ErrorMassage />}
+               {setContent(process, RandomCharBlock, char)}
             </CSSTransition>
          </SwitchTransition>
 
@@ -59,9 +59,9 @@ const RandomChar = () => {
 
 }
 
-const RandomCharBlock = ({ char }) => {
+const RandomCharBlock = ({ data }) => {
 
-   const { name, description, thumbnail, homepage, wiki } = char;
+   const { name, description, thumbnail, homepage, wiki } = data;
 
    let imgClass = "randomchar__img";
    if (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
@@ -71,7 +71,7 @@ const RandomCharBlock = ({ char }) => {
       <div className="randomchar__block">
          <img src={thumbnail} alt="Random character" className={imgClass} />
          <div className="randomchar__info">
-            <p className="randomchar__name">{name && name.length > 20 ? `${char.name.substring(0, 20)}...` : name}</p>
+            <p className="randomchar__name">{name && name.length > 20 ? `${name.substring(0, 20)}...` : name}</p>
             <p className="randomchar__descr">
                {description}
             </p>

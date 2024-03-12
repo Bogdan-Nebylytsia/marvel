@@ -1,11 +1,28 @@
-import useMarvelService from '../../services/MarvelSevice';
 import ErrorMassage from '../errorMassage/ErrorMassage';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../spinner/Spinner';   
+
+import useMarvelService from '../../services/MarvelSevice';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './comicsList.scss';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+const setContent = (process, Component, moreCharLoading) => {
+   switch (process) {
+      case 'waiting':
+         return <Spinner />;
+      case 'loading':
+         return moreCharLoading? <Component/> : <Spinner/>;
+      case 'confirmed':
+         return <Component/>;
+      case 'error':
+         return <ErrorMassage />;
+      default:
+         throw new Error('Unexpected process state');
+ 
+   }
+}
 
 
 const ComicsList = () => {
@@ -14,7 +31,7 @@ const ComicsList = () => {
    const [moreComicsLoading, setMoreComicsLoading] = useState(false);
    const [comicsEnded, setComicsEnded] = useState(false);
 
-   const { loading, error, getAllComics } = useMarvelService();
+   const { process, setProcess, getAllComics, } = useMarvelService();
 
    useEffect(() => {
       onRequest(offset, true);
@@ -26,6 +43,7 @@ const ComicsList = () => {
 
       getAllComics(offset)
          .then(onComicsListLoaded)
+         .then(() => setProcess('confirmed'));
    }
 
    const onComicsListLoaded = (newComicsList) => {
@@ -87,16 +105,9 @@ const ComicsList = () => {
       )
    }
 
-   const items = renderItems(comicsList);
-
-   const spinner = loading ? <Spinner /> : null;
-   const errorMassage = error ? <ErrorMassage /> : null;
-
    return (
       <div className="comics__list">
-         {spinner}
-         {errorMassage}
-         {items}
+         {setContent(process, () => renderItems(comicsList), moreComicsLoading )}
          <button className="button button__main button__long"
             style={{ 'display': comicsEnded ? 'none' : 'block' }}
             disabled={moreComicsLoading}

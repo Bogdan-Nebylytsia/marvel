@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Skeleton from '../skeleton/Skeleton';
-import ErrorMassage from '../errorMassage/ErrorMassage';
-import Spinner from '../spinner/Spinner';
+import setContent from '../../utils/setContent';
 import useMarvelService from '../../services/MarvelSevice';
 import './charInfo.scss';
 import { Link } from 'react-router-dom';
@@ -12,7 +10,7 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 const CharInfo = (props) => {
    const [char, setChar] = useState(null);
 
-   const { loading, error, clearError, getCharacter } = useMarvelService();
+   const { process, setProcess, clearError, getCharacter } = useMarvelService();
 
    useEffect(() => {
       updateChar();
@@ -25,22 +23,25 @@ const CharInfo = (props) => {
          return
       }
       clearError();
+      setProcess('loading');
 
       getCharacter(charId)
          .then(setChar)
+         .then(() => setProcess('confirmed'));
    }
+
+
 
    return (
       <div className="char__info">
          <SwitchTransition>
             <CSSTransition
-               key={!char && !loading && !error ? "skeleton" : !(loading || error || !char) ? "char" :
-                  loading ? "loading" : "errorMassage"}
+               key={process}
                timeout={300}
                classNames={"fade-selectedСhar"}
             >
                <div className='fade-selectedСhar'>
-                  {!char && !loading && !error ? <Skeleton /> : !(loading || error || !char) ? <View char={char} /> : loading ? <Spinner /> : <ErrorMassage />}
+                  {setContent(process, View, char)}
                </div>
 
             </CSSTransition>
@@ -50,8 +51,8 @@ const CharInfo = (props) => {
 
 }
 
-const View = ({ char }) => {
-   const { name, thumbnail, description, wiki, homepage, comics } = char;
+const View = ({ data }) => {
+   const { name, thumbnail, description, wiki, homepage, comics } = data;
 
    let imgStyle = thumbnail.includes('image_not_available') ? { "objectFit": "unset" } : { "objectFit": "cover" };
 
